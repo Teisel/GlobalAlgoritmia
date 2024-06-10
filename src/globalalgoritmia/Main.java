@@ -22,9 +22,11 @@ public class Main {
         JButton button3 = new JButton("Ver");
 
         button1.setBackground(new Color(93, 173, 226));
+        button1.setEnabled(false);
         button1.setBorder(new RoundBorder(5));
 
         button2.setBackground(new Color(192, 57, 43));
+        button2.setEnabled(false);
         button2.setBorder(new RoundBorder(5));
 
         button3.setBackground(new Color(69, 179, 157));
@@ -53,17 +55,13 @@ public class Main {
         button3.addActionListener((ActionEvent e) -> {
             if (graph.getStartNode() != null && graph.getEndNode() != null) {
                 String algorithm = (String) comboBox.getSelectedItem();
-                graph.executeAlgorithmAndHighlightPath(graph.getStartNode(), graph.getEndNode(), algorithm);
+                //graph.executeAlgorithmAndHighlightPath(graph.getStartNode(), graph.getEndNode(), algorithm);
             } else {
                 JOptionPane.showMessageDialog(frame, "Please select a start and end node.");
             }
         });
 
-        frame.setFocusableWindowState(true);
-        frame.setFocusable(true);
         frame.setVisible(true);
-
-        frame.requestFocusInWindow();
 
     }
 }
