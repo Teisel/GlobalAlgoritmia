@@ -20,6 +20,7 @@ public class Main {
         JButton button1 = new JButton("Inicio");
         JButton button2 = new JButton("Fin");
         JButton button3 = new JButton("Ver");
+        JButton button4 = new JButton("Reset");
 
         button1.setBackground(new Color(91, 136, 165));
         button1.setEnabled(false);
@@ -31,10 +32,14 @@ public class Main {
 
         button3.setBackground(new Color(69, 179, 157));
         button3.setBorder(new RoundBorder(5));
+        
+        button4.setBackground(new Color(244, 244, 242));
+        button4.setBorder(new RoundBorder(5));
 
         buttonPanel.add(button1);
         buttonPanel.add(button2);
         buttonPanel.add(button3);
+        buttonPanel.add(button4);
 
         String[] options = {"A*", "Dijkstra"};
         JComboBox<String> comboBox = new JComboBox<>(options);
@@ -59,6 +64,11 @@ public class Main {
             } else {
                 JOptionPane.showMessageDialog(frame, "Please select a start and end node.");
             }
+        });
+        
+        button4.addActionListener((ActionEvent e) ->
+        {
+            graph.reset();
         });
 
         frame.setVisible(true);

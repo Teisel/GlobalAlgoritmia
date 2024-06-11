@@ -33,12 +33,39 @@ public class Node extends JButton {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                setColor();    
+                setColor();
             }
         });
-        
-        
 
+    }
+
+    public NodeState getState() {
+        return state;
+    }
+
+    public void setState(NodeState state) {
+        this.state = state;
+    }
+
+    public int getNumState() {
+        return numState;
+    }
+
+    public void setNumState(int numState) {
+        this.numState = numState;
+    }
+
+    public GridGraph getGraph() {
+        return graph;
+    }
+
+    public void setGraph(GridGraph graph) {
+        this.graph = graph;
+    }
+    
+    public void setCustomColor(Color color)
+    {
+        setBackground(color);
     }
 
     public void addNeighbor(Node node) {
@@ -56,57 +83,55 @@ public class Node extends JButton {
     public int getColumn() {
         return column;
     }
-    
-    public void setColor()
-    {
+
+    public void setColor() {
         numState++;
-        switch (numState)
-                {
-                    case 0:
-                        setBackground(NodeState.WHITE.getColor());
-                        state = NodeState.WHITE;
-                    break;
-                    
-                    case 1:
-                        if(graph.getStartNode() == null)
-                        {
-                            setBackground(NodeState.START.getColor());
-                            state = NodeState.START;
-                            graph.setStartNode(Node.this);
-                        } 
-                        else
-                        {
-                            setColor();
-                        }
-                    break;
-                    
-                    case 2:
-                        if(state == NodeState.START)
-                        {
-                            graph.setStartNode(null);
-                        }
-                        if(graph.getEndNode() == null)
-                        {
-                            setBackground(NodeState.END.getColor());
-                            state = NodeState.END;
-                            graph.setEndNode(Node.this);
-                        }
-                        else
-                        {
-                            setColor();
-                        }
-                    break;
-                    
-                    case 3:
-                        if(state == NodeState.END)
-                        {
-                            graph.setEndNode(null);
-                        }
-                        setBackground(NodeState.GRAY.getColor());
-                        state = NodeState.GRAY;
-                        numState = -1;
-                    break;
+        switch (numState) {
+            case 0:
+                setBackground(NodeState.WHITE.getColor());
+                state = NodeState.WHITE;
+                break;
+
+            case 1:
+                if (graph.getStartNode() == null) {
+                    setBackground(NodeState.START.getColor());
+                    state = NodeState.START;
+                    graph.setStartNode(Node.this);
+                } else {
+                    setColor();
                 }
+                break;
+
+            case 2:
+                if (state == NodeState.START) {
+                    graph.setStartNode(null);
+                }
+                if (graph.getEndNode() == null) {
+                    setBackground(NodeState.END.getColor());
+                    state = NodeState.END;
+                    graph.setEndNode(Node.this);
+                } else {
+                    setColor();
+                }
+                break;
+
+            case 3:
+                if (state == NodeState.END) {
+                    graph.setEndNode(null);
+                }
+                setBackground(NodeState.GRAY.getColor());
+                state = NodeState.GRAY;
+                numState = -1;
+                break;
+        }
+    }
+
+    public int getDistance(Node node) {
+        return Math.abs(this.getRow() - node.getRow()) + Math.abs(this.getColumn() - node.getColumn());
+    }
+
+    public int getDistance() {
+        return getDistance(graph.getStartNode());
     }
 
 }
