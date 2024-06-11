@@ -21,11 +21,11 @@ public class Main {
         JButton button2 = new JButton("Fin");
         JButton button3 = new JButton("Ver");
 
-        button1.setBackground(new Color(93, 173, 226));
+        button1.setBackground(new Color(91, 136, 165));
         button1.setEnabled(false);
         button1.setBorder(new RoundBorder(5));
 
-        button2.setBackground(new Color(192, 57, 43));
+        button2.setBackground(new Color(212, 205, 197));
         button2.setEnabled(false);
         button2.setBorder(new RoundBorder(5));
 

@@ -65,7 +65,25 @@ public class GridGraph {
 
     void executeAlgorithm(String algorithm) 
     {
-        System.out.println("Soy un algoritmo");
+        
+        switch (algorithm)
+        {
+            case "A*":
+                aStar();
+            break;
+            
+            case "Dijkstra":
+                dijkstra();
+            break;
+        }
+    }
+
+    private void aStar() {
+        System.out.println("Soy un algoritmo: a*");
+    }
+
+    private void dijkstra() {
+         System.out.println("Soy un algoritmo: dijkstra");
     }
 
 }
