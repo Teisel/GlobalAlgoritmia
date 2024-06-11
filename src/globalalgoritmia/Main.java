@@ -55,7 +55,7 @@ public class Main {
         button3.addActionListener((ActionEvent e) -> {
             if (graph.getStartNode() != null && graph.getEndNode() != null) {
                 String algorithm = (String) comboBox.getSelectedItem();
-                //graph.executeAlgorithmAndHighlightPath(graph.getStartNode(), graph.getEndNode(), algorithm);
+                graph.executeAlgorithm(algorithm);
             } else {
                 JOptionPane.showMessageDialog(frame, "Please select a start and end node.");
             }

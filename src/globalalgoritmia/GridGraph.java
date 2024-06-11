@@ -18,7 +18,7 @@ public class GridGraph {
         for (int i = 0; i < 10; i++) {
             List<Node> row = new ArrayList<>();
             for (int j = 0; j < 10; j++) {
-                Node node = new Node(i, j);
+                Node node = new Node(i, j, this);
                 row.add(node);
             }
             graph.add(row);
@@ -61,6 +61,11 @@ public class GridGraph {
 
     public void setEndNode(Node endNode) {
         this.endNode = endNode;
+    }
+
+    void executeAlgorithm(String algorithm) 
+    {
+        System.out.println("Soy un algoritmo");
     }
 
 }
