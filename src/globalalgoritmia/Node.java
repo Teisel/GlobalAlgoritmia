@@ -15,6 +15,7 @@ public class Node extends JButton {
     private NodeState state;
     private int numState;
     private GridGraph graph;
+    private int weight;
 
     public Node(int row, int column, GridGraph graph) {
         super();
@@ -27,6 +28,7 @@ public class Node extends JButton {
         this.state = NodeState.WHITE;
         this.numState = 0;
         this.graph = graph;
+        this.weight = 0;
 
         addActionListener(new ActionListener() {
             Color initialColor = getBackground();
@@ -39,6 +41,14 @@ public class Node extends JButton {
 
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+    
     public NodeState getState() {
         return state;
     }

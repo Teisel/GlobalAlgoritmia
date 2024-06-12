@@ -122,12 +122,7 @@ public class GridGraph {
             currentNode.setState(NodeState.CHECK);
             currentNode.setCustomColor(NodeState.CHECK.getColor());
 
-            // Agregar un intervalo de tiempo para que se pueda apreciar la visita de los nodos
-            try {
-                Thread.sleep(100); // 100 milisegundos
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+         
 
             for (Node neighbor : currentNode.getNeighbors()) {
                 if (!visited.contains(neighbor) && neighbor.getState() != NodeState.GRAY) {
@@ -151,7 +146,83 @@ public class GridGraph {
     }
 
     private void dijkstra() {
-        System.out.println("Soy un algoritmo: dijkstra");
+        Node startNode = getStartNode();
+        Node endNode = getEndNode();
+
+        if (startNode == null || endNode == null) {
+            System.out.println("No se ha seleccionado nodo de inicio o fin");
+            return;
+        }
+
+        // Crear una cola de prioridad para los nodos a visitar
+        PriorityQueue<Node> queue = new PriorityQueue<>((n1, n2) -> {
+            return (int) (n1.getDistance() - n2.getDistance());
+        });
+
+        // Agregar el nodo de inicio a la cola
+        queue.add(startNode);
+
+        // Crear un conjunto de nodos visitados
+        Set<Node> visited = new HashSet<>();
+
+        // Crear un mapa de nodos padre
+        Map<Node, Node> parentMap = new HashMap<>();
+
+        // Inicializar la distancia de todos los nodos a infinito      
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                Node currentNode = graph.get(i).get(j);
+                currentNode.setWeight(Integer.MAX_VALUE);
+            }
+        }
+
+        // Establecer la distancia del nodo de inicio a 0
+        startNode.setWeight(0);
+
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.poll();
+
+            if (currentNode.equals(endNode)) {
+                // Reconstruir el camino desde el nodo de fin hasta el nodo de inicio
+                List<Node> path = new ArrayList<>();
+                while (currentNode != null) {
+                    path.add(currentNode);
+                    currentNode = parentMap.get(currentNode);
+                }
+                // Mostrar el camino
+                for (Node node : path) {
+                    node.setBackground(NodeState.PATH.getColor());
+                }
+                return;
+            }
+
+            visited.add(currentNode);
+
+            // Marcar el nodo actual como CHECK para visualizar que se está visitando
+            currentNode.setState(NodeState.CHECK);
+            currentNode.setCustomColor(NodeState.CHECK.getColor());
+
+            // Agregar un intervalo de tiempo para que se pueda apreciar la visita de los nodos
+            
+
+            for (Node neighbor : currentNode.getNeighbors()) {
+                if (!visited.contains(neighbor) && neighbor.getState() != NodeState.GRAY) {
+                    // Calcular la distancia desde el nodo de inicio hasta el nodo vecino
+                    int distance = currentNode.getWeight() + 1;
+
+                    // Si la distancia calculada es menor que la distancia actual del nodo vecino
+                    if (distance < neighbor.getWeight()) {
+                        // Actualizar la distancia del nodo vecino
+                        neighbor.setWeight(distance);
+                        // Agregar el nodo vecino a la cola con su prioridad
+                        queue.add(neighbor);
+                        parentMap.put(neighbor, currentNode);
+                    }
+                }
+            }
+        }
+
+        System.out.println("No se encontró camino");
     }
 
     void reset() {
